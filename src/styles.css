@@ -1,0 +1,88 @@
+body {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+main {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+hr {
+  margin: 50px auto 30px;
+}
+
+figure {
+  margin: auto;
+  display: block;
+  max-width: 200px;
+  padding: 10px 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 4px 0px rgba(10, 10, 10, 0.5);
+  border-radius: 5px;
+}
+
+figure img {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+figure h3 {
+  text-align: center;
+}
+
+.Comment {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  padding: 10px 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 0px rgba(10, 10, 10, 0.5);
+}
+
+.Comment figure {
+  max-width: 100px;
+  width: 100%;
+  padding: 0;
+  margin: 0 15px 0 0;
+  border: none;
+  box-shadow: none;
+}
+
+.Comment figure img {
+  max-width: 50px;
+  display: block;
+  margin: auto;
+}
+
+.Comment figure figcaption {
+  text-align: center;
+  margin-top: 10px;
+  color: #333;
+  font-size: 13px;
+}
+
+.Comment .Comment-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.Comment .Comment-content.Comment-text {
+  font-size: 14px;
+}
+.Comment .Comment-content .Comment-date {
+  text-align: right;
+  color: #ccc;
+  font-size: 13px;
+}
