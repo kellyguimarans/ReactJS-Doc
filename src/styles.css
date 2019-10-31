@@ -86,3 +86,26 @@ figure h3 {
   color: #ccc;
   font-size: 13px;
 }
+
+.btn {
+  position: relative;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 5px;
+  min-width: 75px;
+  line-height: 25px;
+  transition: all 0.3s linear;
+}
+.btn-on {
+  background-color: rgb(11, 95, 11);
+  color: white;
+  outline-color: rgb(11, 95, 11);
+}
+
+.btn-off {
+  background-color: rgb(185, 13, 13);
+  color: white;
+  outline-color: rgb(185, 13, 13);
+  transition: all 0.3s linear;
+}

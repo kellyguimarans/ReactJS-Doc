@@ -208,4 +208,143 @@ class Clock extends React.Component {
   }
 }
 
-ReactDOM.render(<Clock />, document.getElementById("statesLife"));
+function App() {
+  return (
+    <React.Fragment>
+      <Clock />
+    </React.Fragment>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("statesLife"));
+/**
+ *
+ *  Fim tópico
+ *
+ **/
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+  }
+
+  // Arrow function não precisa criar o bind ele aponta para ele mesmo naturalmente
+  handleClick = () => {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  };
+
+  render() {
+    return (
+      <button
+        onClick={this.handleClick}
+        className={this.state.isToggleOn ? "btn btn-on" : "btn btn-off"}
+      >
+        {this.state.isToggleOn ? "on" : "off"}
+      </button>
+    );
+  }
+}
+
+ReactDOM.render(<Toggle />, document.getElementById("handlingEvents"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
+
+function UserGreeting(props) {
+  return <h2>Bem vindo de volta!</h2>;
+}
+
+function GuestGreeting(props) {
+  return <h2>Deslogado!</h2>;
+}
+
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+function LoginButton(props) {
+  return <button onClick={props.onClick}>Login</button>;
+}
+
+function LogoutButton(props) {
+  return <button onClick={props.onClick}>Logout</button>;
+}
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoggedIn: false };
+  }
+
+  handleLoginClick = () => {
+    this.setState({ isLoggedIn: true });
+  };
+
+  handleLogoutClick = () => {
+    this.setState({ isLoggedIn: false });
+  };
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <React.Fragment>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </React.Fragment>
+    );
+  }
+}
+ReactDOM.render(<LoginControl />, document.getElementById("conditionalRender"));
+
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return <div className="warning">Warning!</div>;
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+  }
+
+  handleToggleClick = () => {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <WarningBanner warn={this.state.showWarning} />
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? "Hide" : "Show"}
+        </button>
+      </React.Fragment>
+    );
+  }
+}
+
+ReactDOM.render(<Page />, document.getElementById("conditionalRender"));
