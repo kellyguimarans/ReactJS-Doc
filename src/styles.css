@@ -1,5 +1,5 @@
 body {
-  font-family: "Roboto";
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -108,4 +108,40 @@ figure h3 {
   color: white;
   outline-color: rgb(185, 13, 13);
   transition: all 0.3s linear;
+}
+
+.form {
+  position: relative;
+  display: block;
+  margin: auto 25px;
+}
+
+.form div {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form__label {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  display: block;
+}
+
+.form__input {
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 0 10px;
+  border: 0;
+  border-bottom: 2px solid gray;
+  border-radius: 5px;
+  outline-color: #333;
+}
+
+.form__input--select {
+  background: transparent;
+  margin-top: 5px;
+  height: 25px;
+  padding: 0 5px;
 }

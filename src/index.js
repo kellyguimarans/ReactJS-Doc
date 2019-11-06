@@ -348,3 +348,117 @@ class Page extends React.Component {
 }
 
 ReactDOM.render(<Page />, document.getElementById("conditionalRender"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
+function Blog(props) {
+  const sidebar = (
+    <ul>
+      {props.posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+  const content = props.posts.map(post => (
+    <div key={post.id}>
+      <h3>{post.title}</h3>
+      <p>{post.content}</p>
+    </div>
+  ));
+  return (
+    <div>
+      {sidebar}
+      <br />
+      {content}
+    </div>
+  );
+}
+
+const posts = [
+  { id: 1, title: "Hello World", content: "Welcome to learning React!" },
+  { id: 2, title: "Installation", content: "You can install React from npm." }
+];
+
+ReactDOM.render(<Blog posts={posts} />, document.getElementById("keyList"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
+
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    //Nome dos values
+    this.state = {
+      value: "",
+      select: "coco",
+      textarea:
+        "Por favor, escreva uma dissertação sobre o seu elemento DOM favorito."
+    };
+  }
+
+  handleChange = event => {
+    const target = event.target;
+    this.setState({ value: target.value });
+    this.setState({ select: target.select });
+    this.setState({ textarea: target.textarea });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    alert(
+      `
+      Nome: ${this.event.value}
+      Sabor: ${this.event.select}
+      Dissertação: ${this.event.textarea}
+      `
+    );
+  };
+
+  render() {
+    return (
+      <form className="form" onSubmit={this.handleSubmit}>
+        <div>
+          <label className="form__label">Nome:</label>
+          <input
+            className="form__input"
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div>
+          <label className="form__label">Escolha seu sabor favorito:</label>
+          <select
+            className="form__input form__input--select"
+            value={this.state.select}
+            onChange={this.handleChange}
+          >
+            <option value="laranja">Laranja</option>
+            <option value="limao">Limão</option>
+            <option value="coco">Coco</option>
+            <option value="manga">Manga</option>
+          </select>
+        </div>
+        <div>
+          <label className="form__label">Dissertação:</label>
+          <textarea
+            className="form__input"
+            value={this.state.textarea}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button className="btn" type="submit">
+          enviar
+        </button>
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(<NameForm />, document.getElementById("forms"));
