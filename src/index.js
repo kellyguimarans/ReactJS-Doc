@@ -403,21 +403,18 @@ class NameForm extends React.Component {
   }
 
   handleChange = event => {
-    const target = event.target;
-    this.setState({ value: target.value });
-    this.setState({ select: target.select });
-    this.setState({ textarea: target.textarea });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   handleSubmit = event => {
-    event.preventDefault();
-    alert(
-      `
-      Nome: ${this.event.value}
-      Sabor: ${this.event.select}
-      Dissertação: ${this.event.textarea}
-      `
+    console.log(
+      "Nome: " + this.state.value,
+      +"Sabor: " + this.state.select,
+      +"Dissertação: " + this.state.textarea
     );
+    event.preventDefault();
   };
 
   render() {
@@ -426,6 +423,7 @@ class NameForm extends React.Component {
         <div>
           <label className="form__label">Nome:</label>
           <input
+            name="value"
             className="form__input"
             type="text"
             value={this.state.value}
@@ -435,6 +433,7 @@ class NameForm extends React.Component {
         <div>
           <label className="form__label">Escolha seu sabor favorito:</label>
           <select
+            name="select"
             className="form__input form__input--select"
             value={this.state.select}
             onChange={this.handleChange}
@@ -448,6 +447,7 @@ class NameForm extends React.Component {
         <div>
           <label className="form__label">Dissertação:</label>
           <textarea
+            name="textarea"
             className="form__input"
             value={this.state.textarea}
             onChange={this.handleChange}
@@ -462,3 +462,110 @@ class NameForm extends React.Component {
 }
 
 ReactDOM.render(<NameForm />, document.getElementById("forms"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
+
+const scaleNames = {
+  c: "Celsius",
+  f: "Fahrenheit"
+};
+
+function BoilingVerdict(props) {
+  return props.celsius >= 100 ? (
+    <p>A água ferveria.</p>
+  ) : (
+    <p>A água não ferveria.</p>
+  );
+}
+
+function toCelsius(fahrenheit) {
+  return ((fahrenheit - 32) * 5) / 9;
+}
+
+function toFahrenheit(celsius) {
+  return (celsius * 9) / 5 + 32;
+}
+
+function tryConvert(temperature, convert) {
+  const input = parseFloat(temperature);
+
+  if (Number.isNaN(input)) return "";
+
+  const output = convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+
+  return rounded.toString();
+}
+
+class TemperatureInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { temperature: "" };
+  }
+
+  handleChange = e => {
+    // this.setState({ temperature: e.target.value });
+    this.props.onTemperatureChange(e.target.value);
+  };
+
+  render() {
+    const temperature = this.props.temperature;
+    const scale = this.props.scale;
+
+    return (
+      <fieldset>
+        <legend>Informe a temperatura em {scaleNames[scale]}</legend>
+        <input value={temperature} onChange={this.handleChange} />
+
+        <BoilingVerdict celsius={parseFloat(temperature)} />
+      </fieldset>
+    );
+  }
+}
+
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { temperature: "", scale: "c" };
+  }
+
+  handleCelsiusChange = temperature => {
+    this.setState({ scale: "c", temperature });
+  };
+
+  handleFahrenheitChange = temperature => {
+    this.setState({ scale: "f", temperature });
+  };
+
+  render() {
+    const scale = this.state.scale,
+      temperature = this.state.temperature,
+      celsius =
+        scale === "f" ? tryConvert(temperature, toCelsius) : temperature,
+      fahrenheit =
+        scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature;
+
+    return (
+      <div>
+        <TemperatureInput
+          scale="c"
+          temperature={celsius}
+          onTemperatureChange={this.handleCelsiusChange}
+        />
+
+        <TemperatureInput
+          scale="f"
+          temperature={fahrenheit}
+          onTemperatureChange={this.handleFahrenheitChange}
+        />
+
+        <BoilingVerdict celsius={parseFloat(celsius)} />
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Calculator />, document.getElementById("elevationState"));
