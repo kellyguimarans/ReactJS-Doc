@@ -569,3 +569,126 @@ class Calculator extends React.Component {
   }
 }
 ReactDOM.render(<Calculator />, document.getElementById("elevationState"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
+
+function FancyBorder(props) {
+  return (
+    <div className={`FancyBorder FancyBorder ${props.color}`}>
+      {props.children}
+    </div>
+  );
+}
+
+function Dialog(props) {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">{props.title}</h1>
+      <label className="Dialog-messege">{props.message}</label>
+      {props.children}
+    </FancyBorder>
+  );
+}
+
+class SignUpDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { login: "" };
+  }
+
+  handleChange = event => {
+    this.setState({ login: event.target.value });
+  };
+
+  handleSignUp = () => alert(`Bem-vindo a bordo, ${this.state.login}`);
+
+  render() {
+    return (
+      <Dialog
+        title="Programa de Exploração de Marte"
+        message="Como gostaria de ser chamado?"
+      >
+        <div className="form">
+          <input
+            type="text"
+            className="form__input"
+            value={this.state.login}
+            onChange={this.handleChange}
+          />
+
+          <button className="btn" onClick={this.handleSignUp}>
+            Cadastre-se
+          </button>
+        </div>
+      </Dialog>
+    );
+  }
+}
+
+function WelcomeDialog() {
+  return (
+    <Dialog
+      title="Bem-vindo"
+      message="Obrigado por visitar a nossa espaçonave!"
+    />
+  );
+}
+
+/*
+ * Children personalizadas props.nomeDaChildren
+ */
+function Contacts() {
+  return (
+    <React.Fragment>
+      <h1>Contato</h1>
+      <address>Rua dos bobos 0</address>
+    </React.Fragment>
+  );
+}
+
+function Chat() {
+  return (
+    <React.Fragment>
+      <h1>Chat</h1>
+      <p>Fale Conosco</p>
+    </React.Fragment>
+  );
+}
+
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane__left">{props.left}</div>
+      <div className="SplitPane__right">{props.right}</div>
+    </div>
+  );
+}
+
+/*
+ * Renderiza todas as funções
+ */
+function CompoHera() {
+  return (
+    /**
+     * Uso react.fragment como se fosse uma div
+     * React rendereza apenas um componente inteiro
+     **/
+    <React.Fragment>
+      <WelcomeDialog />
+      <SplitPane left={<Contacts />} right={<Chat />} />
+      <SignUpDialog />
+    </React.Fragment>
+  );
+}
+
+ReactDOM.render(<CompoHera />, document.getElementById("compoHera"));
+/* *
+ *
+ *  Fim tópico
+ *
+ *
+ * */
