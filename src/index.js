@@ -692,3 +692,75 @@ ReactDOM.render(<CompoHera />, document.getElementById("compoHera"));
  *
  *
  * */
+
+function SearchBar(props) {
+  return (
+    <form className="form">
+      <div>
+        <input
+          placeholder="Search..."
+          name="value"
+          className="form__input"
+          type="text"
+        />
+      </div>
+      <div>
+        <label className="form__label">
+          <input type="checkbox" name="check" />
+          Only show products in stock
+        </label>
+      </div>
+    </form>
+  );
+}
+
+function ProductTable(props) {
+  return (
+    <table className="Table">
+      <thead className="table__content">
+        <tr className="table__line">
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+    </table>
+  );
+}
+
+function ProductCategoryRow(props) {
+  return (
+    <tbody className="table__content">
+      <tr className="table__line--category">
+        <td colSpan="2">Sporting Goods</td>
+      </tr>
+    </tbody>
+  );
+}
+
+function ProductRow(props) {
+  return (
+    <tr className="table__line">
+      <td className="table__column--production" />
+      <td className="table__column--price" />
+    </tr>
+  );
+}
+class FilterableProductTable extends React.Component {
+  render() {
+    return (
+      <div className="Container">
+        <SearchBar />
+        <ProductTable>
+          <ProductCategoryRow>
+            <ProductRow />
+          </ProductCategoryRow>
+        </ProductTable>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <FilterableProductTable />,
+  document.getElementById("jeitoReact")
+);
